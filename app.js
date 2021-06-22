@@ -24,7 +24,6 @@ let imgArray = [
   'water-can.jpg',
   'wine-glass.jpg'];
   let newarry=[22,21,20]
-// let clicks = 0;
 let counter = 0;
 let imageSection = document.getElementById('imageSection');
 let leftImage = document.getElementById('leftImage');
@@ -37,7 +36,6 @@ let leftindex;
 function Imgs(name, src) {
   this.name = name;
   this.src = `./assets/${src}`;
-  //   this.counter=0;
   this.clicks = 0;
   this.views = 0;
   Imgs.all.push(this);
@@ -49,17 +47,7 @@ for (let i = 0; i < imgArray.length; i++) {
 
 
 }
-// function render() {
-//   leftindex = randomNumber(0, imgArray.length - 1);
 
-
-//   do {
-//     midindex = randomNumber(0, imgArray.length - 1);
-//     rightindex = randomNumber(0, imgArray.length - 1);
-
-
-
-//   } while (leftindex  === midindex || leftindex === rightindex || midindex === rightindex);
 function render() {
   
 do { leftindex = randomNumber(0, imgArray.length - 1);
@@ -78,7 +66,7 @@ do { leftindex = randomNumber(0, imgArray.length - 1);
 newarry[0]=leftindex;
 newarry[2]=midindex;
 newarry[1]=rightindex;
-console.log(newarry);
+
 
   rightImage.src = Imgs.all[rightindex].src;
   midImage.src = Imgs.all[midindex].src;
@@ -88,7 +76,7 @@ console.log(newarry);
   Imgs.all[leftindex].views++;
   Imgs.all[midindex].views++;
   Imgs.all[rightindex].views++;
-  //   console.log(Imgs.all);
+ 
 }
 
 
@@ -97,9 +85,9 @@ buttn.addEventListener('click', renderbuttn);
 
 
 imageSection.addEventListener('click', eventhandler);
-render();
 
-//
+
+
 function eventhandler(e) {
   if (counter<25){
     if (e.target.id === 'rightImage') {
@@ -114,13 +102,22 @@ function eventhandler(e) {
     }
   }
   else{counter<25
-    return;
-  }
-
+    return;}
+  localStorage.setItem('Imgs', JSON.stringify(Imgs.all));
   render();
   counter++;  
+  
 }
 
+
+function getData() {
+  let data = JSON.parse(localStorage.getItem('Imgs'));
+   if(data){Imgs.all= data}
+render();
+
+    }
+    getData();
+   
 
 function renderbuttn (){
 
@@ -140,7 +137,6 @@ function renderbuttn (){
     buttn.removeEventListener('click', renderbuttn);
   
 }
-
 function drawChart() {
 
   let name = [];
@@ -206,3 +202,14 @@ function randomNumber(min, max) {
 
 //   else if ((e.target.id === 'midImage') && counter < 25) {
 //     Imgs.all[midindex].clicks++ ;}
+// function render() {
+//   leftindex = randomNumber(0, imgArray.length - 1);
+
+
+//   do {
+//     midindex = randomNumber(0, imgArray.length - 1);
+//     rightindex = randomNumber(0, imgArray.length - 1);
+
+
+
+//   } while (leftindex  === midindex || leftindex === rightindex || midindex === rightindex);
