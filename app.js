@@ -160,6 +160,7 @@ function drawChart() {
   function addData(chart, label, color, data) {
 		chart.data.datasets.push({
 	    label: label,
+      borderColor,color,
       backgroundColor: color,
       data: data
     });
@@ -168,7 +169,7 @@ function drawChart() {
     chart.update();
 }
 setTimeout(function() {
-  addData(myChart, '# of views', '#ff0000', views);
+  addData(myChart, '# of views',['rgb(240,100,114)'], '#ff0000', views);
 },);
 
 
